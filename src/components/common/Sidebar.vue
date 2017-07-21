@@ -27,16 +27,16 @@
                     {
                         icon: 'el-icon-setting',
                         index: 'readme',
-                        title: '自述'
+                        title: '使用说明'
                     },
                     {
                         icon: 'el-icon-menu',
                         index: '2',
-                        title: '表格',
+                        title: '低电表格',
                         subs: [
                             {
                                 index: 'basetable',
-                                title: '基础表格'
+                                title: '低电表格'
                             },
                             {
                                 index: 'vuetable',

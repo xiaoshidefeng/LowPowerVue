@@ -3,60 +3,42 @@
         <div class="crumbs">
             <el-breadcrumb separator="/">
                 <el-breadcrumb-item><i class="el-icon-menu"></i> 表格</el-breadcrumb-item>
-                <el-breadcrumb-item>低电表格</el-breadcrumb-item>
+                <el-breadcrumb-item>基础表格</el-breadcrumb-item>
             </el-breadcrumb>
         </div>
         <div class="handle-box">
-            <!-- <el-button type="primary" icon="delete" class="handle-del mr10" @click="delAll">批量删除</el-button> -->
-            <!-- <el-select v-model="select_area" placeholder="东/西区" class="handle-select mr10">
-                <el-option key="1" label="东区" value="东区"></el-option>
-                <el-option key="2" label="西区" value="西区"></el-option>
-            </el-select> -->
-            <el-select v-model="select_floor" placeholder="楼幢号" class="handle-select mr10">
-                <el-option key="1" label="东区1号楼" value="东区1号楼"></el-option>
-                <el-option key="3" label="东区3号楼" value="东区3号楼"></el-option>
-                <el-option key="4" label="东区4号楼" value="东区4号楼"></el-option>
-                <el-option key="5" label="东区5.6号楼" value="东区5.6号楼"></el-option>
-                <el-option key="7" label="东区7号楼" value="东区7号楼"></el-option>
-                <el-option key="8" label="东区8号楼" value="东区8号楼"></el-option>
-                <el-option key="9" label="西区9号楼" value="西区9号楼"></el-option>
-                <el-option key="10" label="西区10号楼" value="西区10号楼"></el-option>
-                <el-option key="11" label="西区11号楼" value="西区11号楼"></el-option>
-                <el-option key="12" label="西区12号楼" value="西区12号楼"></el-option>
-                <el-option key="13" label="西区13号楼" value="西区13号楼"></el-option>
-                <el-option key="14" label="西区14号楼" value="西区14号楼"></el-option>
-                <el-option key="15" label="东区15号楼" value="东区15号楼"></el-option>
-                <el-option key="16" label="东区16号楼" value="东区16号楼"></el-option>
+            <el-button type="primary" icon="delete" class="handle-del mr10" @click="delAll">批量删除</el-button>
+            <el-select v-model="select_cate" placeholder="筛选省份" class="handle-select mr10">
+                <el-option key="1" label="广东省" value="广东省"></el-option>
+                <el-option key="2" label="湖南省" value="湖南省"></el-option>
             </el-select>
             <el-input v-model="select_word" placeholder="筛选关键词" class="handle-input mr10"></el-input>
             <el-button type="primary" icon="search" @click="search">搜索</el-button>
         </div>
         <el-table :data="data" border style="width: 100%" ref="multipleTable" @selection-change="handleSelectionChange">
-            <!-- <el-table-column type="selection" width="55"></el-table-column> -->
-            <el-table-column prop="buildingName" label="楼幢号" sortable width="200">
+            <el-table-column type="selection" width="55"></el-table-column>
+            <el-table-column prop="date" label="日期" sortable width="150">
             </el-table-column>
-            <el-table-column prop="dormNum" label="寝室号" sortable width="200">
+            <el-table-column prop="name" label="姓名" width="120">
             </el-table-column>
-            <el-table-column prop="powerNum" label="电量" sortable width="200">
+            <el-table-column prop="address" label="地址" :formatter="formatter">
             </el-table-column>
-            <el-table-column prop="dateNum" label="日期" width="200">
-            </el-table-column>
-            <el-table-column label="备注" :label-width="formLabelWidth">
-                <!-- <template scope="scope">
+            <el-table-column label="操作" width="180">
+                <template scope="scope">
                     <el-button size="small"
                             @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
                     <el-button size="small" type="danger"
                             @click="handleDelete(scope.$index, scope.row)">删除</el-button>
-                </template> -->
+                </template>
             </el-table-column>
         </el-table>
-        <!-- <div class="pagination">
+        <div class="pagination">
             <el-pagination
                     @current-change ="handleCurrentChange"
                     layout="prev, pager, next"
                     :total="1000">
             </el-pagination>
-        </div> -->
+        </div>
     </div>
 </template>
 
@@ -64,14 +46,11 @@
     export default {
         data() {
             return {
-                url: 'http://localhost:10352/api/',
-                api: 'http://localhost:10352/api/',
+                url: './static/vuetable.json',
                 tableData: [],
                 cur_page: 1,
                 multipleSelection: [],
                 select_cate: '',
-                select_area: '',  //选择东西区
-                select_floor: '东区1号楼',  //选择楼号
                 select_word: '',
                 del_list: [],
                 is_search: false
@@ -92,9 +71,9 @@
                         }
                     }
                     if(!is_del){
-                        if(d.buildingName.indexOf(self.select_floor) > -1 &&
-                            (d.buildingName.indexOf(self.select_word) > -1 ||
-                            d.dormNum.indexOf(self.select_word) > -1)
+                        if(d.address.indexOf(self.select_cate) > -1 && 
+                            (d.name.indexOf(self.select_word) > -1 ||
+                            d.address.indexOf(self.select_word) > -1)
                         ){
                             return d;
                         }
@@ -109,16 +88,12 @@
             },
             getData(){
                 let self = this;
-                // if(process.env.NODE_ENV === 'development'){
-                //     self.url = '/ms/table/list';
-                // };
-                self.$axios.get(self.api + 'lowpower').then((response) => {
-                  self.tableData = response.data.data;
-                  // console.log(self.tableData)
+                if(process.env.NODE_ENV === 'development'){
+                    self.url = '/ms/table/list';
+                };
+                self.$axios.post(self.url, {page:self.cur_page}).then((res) => {
+                    self.tableData = res.data.list;
                 })
-                // self.$axios.post(self.url, {page:self.cur_page}).then((res) => {
-                //     self.tableData = res.data.list;
-                // })
             },
             search(){
                 this.is_search = true;
