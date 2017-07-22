@@ -2,53 +2,41 @@
     <div>
         <div class="crumbs">
             <el-breadcrumb separator="/">
-                <el-breadcrumb-item><i class="el-icon-date"></i> 表单</el-breadcrumb-item>
-                <el-breadcrumb-item>基本表单</el-breadcrumb-item>
+                <el-breadcrumb-item><i class="el-icon-date"></i> 绑定</el-breadcrumb-item>
+                <el-breadcrumb-item>绑定宿舍</el-breadcrumb-item>
             </el-breadcrumb>
         </div>
+        <div class="ms-doc">
+            <h3>绑定说明</h3>
+            <article>
+
+                <p>在宿舍号中填写对应的宿舍号（须按要求填写，否则不能准确获得低电推送）</p>
+                <p>宿舍号格式如下：</p>
+                <p>楼号-寝室号</p>
+                <p>例如：东区1幢101寝室，填写1-101即可（东西区不用填写）</p>
+                <br></br>
+                <p>部分特殊寝室号说明：</p>
+                <p>东区15幢寝室分为A B两个部分，填写格式为：</p>
+                <p>寝室号+A或B</p>
+                <p>例如：东区15幢101寝室A，填写101A即可（不需要填写15-）</p>
+
+                <br>
+                <p>西区9幢和西区老9幢填写的时候需要进行区分</p>
+                <p>西区老9幢要勾选 西区老9幢选项</p>
+
+            </article>
+        </div>
+        <br>
+        <br>
         <div class="form-box">
             <el-form ref="form" :model="form" label-width="80px">
-                <el-form-item label="表单名称">
-                    <el-input v-model="form.name"></el-input>
-                </el-form-item>
-                <el-form-item label="选择器">
-                    <el-select v-model="form.region" placeholder="请选择">
-                        <el-option key="bbk" label="步步高" value="bbk"></el-option>
-                        <el-option key="xtc" label="小天才" value="xtc"></el-option>
-                        <el-option key="imoo" label="imoo" value="imoo"></el-option>
-                    </el-select>
-                </el-form-item>
-                <el-form-item label="日期时间">
-                    <el-col :span="11">
-                        <el-date-picker type="date" placeholder="选择日期" v-model="form.date1" style="width: 100%;"></el-date-picker>
-                    </el-col>
-                    <el-col class="line" :span="2">-</el-col>
-                    <el-col :span="11">
-                        <el-time-picker type="fixed-time" placeholder="选择时间" v-model="form.date2" style="width: 100%;"></el-time-picker>
-                    </el-col>
-                </el-form-item>
-                <el-form-item label="选择开关">
-                    <el-switch on-text="" off-text="" v-model="form.delivery"></el-switch>
-                </el-form-item>
-                <el-form-item label="多选框">
-                    <el-checkbox-group v-model="form.type">
-                        <el-checkbox label="步步高" name="type"></el-checkbox>
-                        <el-checkbox label="小天才" name="type"></el-checkbox>
-                        <el-checkbox label="imoo" name="type"></el-checkbox>
-                    </el-checkbox-group>
-                </el-form-item>
-                <el-form-item label="单选框">
-                    <el-radio-group v-model="form.resource">
-                        <el-radio label="步步高"></el-radio>
-                        <el-radio label="小天才"></el-radio>
-                        <el-radio label="imoo"></el-radio>
-                    </el-radio-group>
-                </el-form-item>
-                <el-form-item label="文本框">
-                    <el-input type="textarea" v-model="form.desc"></el-input>
+
+                <el-form-item label="宿舍号">
+                    <el-input v-model="form.dormName"></el-input>
+                    <el-checkbox  v-model="form.checked">西区老9幢</el-checkbox>
                 </el-form-item>
                 <el-form-item>
-                    <el-button type="primary" @click="onSubmit">提交</el-button>
+                    <el-button type="primary" @click="onSubmit" :loading="bindingLoad">提交</el-button>
                     <el-button>取消</el-button>
                 </el-form-item>
             </el-form>
@@ -62,20 +50,53 @@
         data: function(){
             return {
                 form: {
-                    name: '',
+                    dormName: '',
                     region: '',
                     date1: '',
                     date2: '',
+                    checked: false,
                     delivery: true,
-                    type: ['步步高'],
+                    type: ['西区老9幢'],
                     resource: '小天才',
                     desc: ''
-                }
+                },
+                api: 'http://localhost:10352/api/',
+                token: '',
+                bindingLoad: false
             }
         },
         methods: {
             onSubmit() {
-                this.$message.success('提交成功！');
+              this.bindingLoad = true;
+              this.token = this.getCookie('lowPowerToken');
+              var qs = require('qs');
+              this.$axios.post(this.api + 'bindingDorm', qs.stringify({
+                dorm: this.form.dormName,
+                token: this.token,
+                oldNine: this.form.checked
+
+              }),
+              {
+                headers: {
+                  'Content-Type': 'application/x-www-form-urlencoded'
+                }
+              }).then(response => {
+                console.log(response.data);
+                if(response.data.code != 200) {
+                  this.$message({
+                    type: 'error',
+                    message: response.data.msg
+                  });
+                }else if(response.data.code == 200){
+                  this.$message({
+                    type: 'success',
+                    message: this.form.dormName + "寝室绑定成功"
+                  });
+
+                }
+                this.bindingLoad = false;
+              })
+              // this.$message.success('提交成功！');
             }
         }
     }

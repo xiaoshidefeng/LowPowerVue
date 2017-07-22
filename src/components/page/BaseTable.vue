@@ -41,7 +41,7 @@
             </el-table-column>
             <el-table-column prop="dateNum" label="日期" width="200">
             </el-table-column>
-            <el-table-column label="备注" :label-width="formLabelWidth">
+            <el-table-column label="备注" :formatter="formatter">
                 <!-- <template scope="scope">
                     <el-button size="small"
                             @click="handleEdit(scope.$index, scope.row)">编辑</el-button>

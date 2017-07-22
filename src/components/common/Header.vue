@@ -81,7 +81,21 @@
             //     return username;
             // }
         },
+        created() {
+          this.checkLogin();
+        } ,
         methods:{
+            checkLogin() {
+              // this.username = '登';
+              if(!this.getCookie('lowPowerName')) {
+                this.username = '登录';
+                this.regist = '注册';
+              }else {
+                this.username = this.getCookie('lowPowerName');
+                this.regist = '';
+
+              }
+            },
             handleCommand(command) {
                 if(command == 'loginout'){
                     // localStorage.removeItem('ms_username')
@@ -158,7 +172,12 @@
                     this.username = this.email;
                     this.regist = '';
                     this.loginDi = false;
-                    //TODO 保存用户信息，刷新时不要重新登录 
+                    //TODO 保存用户信息，刷新时不要重新登录
+                    //如果登录成功则保存登录状态并设置有效期
+                    let expireDays = 1000 * 60 * 60 * 24 * 15;
+                    this.setCookie('lowPowerToken', response.data.data, expireDays);
+                    this.setCookie('lowPowerName', this.email, expireDays);
+                    this.$router.push('/baseform');
                   }
                   this.loginLoad = false;
                 })
@@ -170,6 +189,10 @@
               type: 'warning'
               }).then(() => {
                 //TODO 删除用户信息
+                this.delCookie('lowPowerToken');
+                this.delCookie('lowPowerName');
+                this.username = '登录';
+                this.regist = '注册';
                 // console.log(row.bookid);
                 // var url = this.api + 'deleteBook/' + row.bookId;
                 // var qs = require('qs');

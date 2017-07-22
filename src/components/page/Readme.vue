@@ -25,8 +25,10 @@
 
 <script>
     export default {
-        data: function(){
-            return {}
+        data() {
+            return {
+
+            }
         }
     }
 </script>

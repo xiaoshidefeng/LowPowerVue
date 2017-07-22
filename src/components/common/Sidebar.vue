@@ -15,6 +15,21 @@
                     </el-menu-item>
                 </template>
             </template>
+
+            <template v-for="item in items2" >
+                <template v-if="item.subs">
+                    <el-submenu :index="item.index">
+                        <template slot="title"><i :class="item.icon"></i>{{ item.title }}</template>
+                        <el-menu-item v-for="(subItem,i) in item.subs" :key="i" :index="subItem.index">{{ subItem.title }}
+                        </el-menu-item>
+                    </el-submenu>
+                </template>
+                <template v-else>
+                    <el-menu-item :index="item.index" v-show="bindDorm">
+                        <i :class="item.icon"></i>{{ item.title }}
+                    </el-menu-item>
+                </template>
+            </template>
         </el-menu>
     </div>
 </template>
@@ -31,59 +46,33 @@
                     },
                     {
                         icon: 'el-icon-menu',
-                        index: '2',
-                        title: '低电表格',
-                        subs: [
-                            {
-                                index: 'basetable',
-                                title: '低电表格'
-                            },
-                            {
-                                index: 'vuetable',
-                                title: 'Vue表格组件'
-                            }
-                        ]
-                    },
+                        index: 'basetable',
+                        title: '低电表格'
+                    }
+                ],
+                items2: [
+
                     {
                         icon: 'el-icon-date',
-                        index: '3',
-                        title: '表单',
-                        subs: [
-                            {
-                                index: 'baseform',
-                                title: '基本表单'
-                            },
-                            {
-                                index: 'vueeditor',
-                                title: '编辑器'
-                            },
-                            {
-                                index: 'markdown',
-                                title: 'markdown'
-                            },
-                            {
-                                index: 'upload',
-                                title: '文件上传'
-                            }
-                        ]
-                    },
-                    {
-                        icon: 'el-icon-star-on',
-                        index: 'basecharts',
-                        title: '图表'
-                    },
-                    {
-                        icon: 'el-icon-upload2',
-                        index: 'drag',
-                        title: '拖拽'
+                        index: 'baseform',
+                        title: '基本表单'
                     }
-                ]
+                ],
+                bindDorm: false
             }
         },
         computed:{
             onRoutes(){
                 return this.$route.path.replace('/','');
             }
+        },
+        created() {
+          if(!this.getCookie('lowPowerName')) {
+            this.bindDorm = false;
+          }else {
+            this.bindDorm = true;
+
+          }
         }
     }
 </script>
