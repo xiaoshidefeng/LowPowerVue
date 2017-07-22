@@ -46,7 +46,7 @@
                     },
                     {
                         icon: 'el-icon-menu',
-                        index: 'basetable',
+                        index: 'lowpower',
                         title: '低电表格'
                     }
                 ],
@@ -54,11 +54,11 @@
 
                     {
                         icon: 'el-icon-date',
-                        index: 'baseform',
-                        title: '基本表单'
+                        index: 'binddorm',
+                        title: '绑定寝室'
                     }
                 ],
-                bindDorm: false
+                bindDorm: true
             }
         },
         computed:{
@@ -67,12 +67,11 @@
             }
         },
         created() {
-          if(!this.getCookie('lowPowerName')) {
-            this.bindDorm = false;
-          }else {
-            this.bindDorm = true;
-
-          }
+          // if(!this.getCookie('lowPowerName')) {
+          //   this.bindDorm = false;
+          // }else {
+          //   this.bindDorm = true;
+          // }
         }
     }
 </script>

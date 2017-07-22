@@ -117,7 +117,7 @@
                     'Content-Type': 'application/x-www-form-urlencoded'
                   }
                 }).then(response => {
-                  console.log(response.data);
+                  // console.log(response.data);
                   this.code = response.data.code;
                   this.msg = response.data.msg;
                   if(this.code != 200) {
@@ -156,7 +156,7 @@
                     'Content-Type': 'application/x-www-form-urlencoded'
                   }
                 }).then(response => {
-                  console.log(response.data);
+                  // console.log(response.data);
                   this.code = response.data.code;
                   this.msg = response.data.msg;
                   if(this.code != 200) {
@@ -177,7 +177,7 @@
                     let expireDays = 1000 * 60 * 60 * 24 * 15;
                     this.setCookie('lowPowerToken', response.data.data, expireDays);
                     this.setCookie('lowPowerName', this.email, expireDays);
-                    this.$router.push('/baseform');
+                    this.$router.push('/binddorm');
                   }
                   this.loginLoad = false;
                 })

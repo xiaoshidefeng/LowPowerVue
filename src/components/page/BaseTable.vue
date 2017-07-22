@@ -15,16 +15,39 @@
             <el-select v-model="select_floor" placeholder="楼幢号" class="handle-select mr10">
                 <el-option key="1" label="东区1号楼" value="东区1号楼"></el-option>
                 <el-option key="3" label="东区3号楼" value="东区3号楼"></el-option>
+
                 <el-option key="4" label="东区4号楼" value="东区4号楼"></el-option>
+                <el-option key="24" label="西区4号楼" value="西区4号楼"></el-option>
+
+                <el-option key="25" label="西区5号楼" value="西区5号楼"></el-option>
+                <el-option key="26" label="西区6号楼" value="西区6号楼"></el-option>
                 <el-option key="5" label="东区5.6号楼" value="东区5.6号楼"></el-option>
+
                 <el-option key="7" label="东区7号楼" value="东区7号楼"></el-option>
+                <el-option key="27" label="西区7号楼" value="西区7号楼"></el-option>
+
                 <el-option key="8" label="东区8号楼" value="东区8号楼"></el-option>
-                <el-option key="9" label="西区9号楼" value="西区9号楼"></el-option>
-                <el-option key="10" label="西区10号楼" value="西区10号楼"></el-option>
-                <el-option key="11" label="西区11号楼" value="西区11号楼"></el-option>
+                <el-option key="28" label="西区8号楼" value="西区8号楼"></el-option>
+
+                <el-option key="9" label="东区9号楼" value="东区9号楼"></el-option>
+                <el-option key="29" label="西区9号楼" value="西区9号楼"></el-option>
+                <el-option key="39" label="西区老9栋" value="西区老9栋"></el-option>
+
+                <el-option key="10" label="东区10号楼" value="东区10号楼"></el-option>
+                <el-option key="20" label="西区10号楼" value="西区10号楼"></el-option>
+
+                <el-option key="11" label="东区11号楼" value="东区11号楼"></el-option>
+                <el-option key="21" label="西区11号楼" value="西区11号楼"></el-option>
+
                 <el-option key="12" label="西区12号楼" value="西区12号楼"></el-option>
-                <el-option key="13" label="西区13号楼" value="西区13号楼"></el-option>
-                <el-option key="14" label="西区14号楼" value="西区14号楼"></el-option>
+                <el-option key="22" label="东区12号楼" value="东区12号楼"></el-option>
+
+                <el-option key="13" label="东区13号楼" value="东区13号楼"></el-option>
+                <el-option key="23" label="西区13号楼" value="西区13号楼"></el-option>
+
+                <el-option key="14" label="东区14号楼" value="东区14号楼"></el-option>
+                <el-option key="34" label="西区14号楼" value="西区14号楼"></el-option>
+
                 <el-option key="15" label="东区15号楼" value="东区15号楼"></el-option>
                 <el-option key="16" label="东区16号楼" value="东区16号楼"></el-option>
             </el-select>
