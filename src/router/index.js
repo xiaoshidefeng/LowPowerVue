@@ -24,12 +24,16 @@ export default new Router({
                 {
                     path: '/binddorm',
                     component: resolve => require(['../components/page/BaseForm.vue'], resolve)
+                },
+                {
+                  path: '/forget_password',
+                  component: resolve => require(['../components/page/ForgetPassword.vue'], resolve)
                 }
             ]
         },
         {
             path: '/readme',
             component: resolve => require(['../components/page/Readme.vue'], resolve)
-        },
+        }
     ]
 })

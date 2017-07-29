@@ -1,6 +1,6 @@
 <template>
     <div class="header">
-        <div class="logo">后台管理系统</div>
+        <div class="logo">低电推送系统</div>
         <div class="user-info">
             <el-dropdown trigger="click" @command="handleCommand">
                 <span class="el-dropdown-link" @click="showLoginDia()">
@@ -45,7 +45,9 @@
                     <el-input v-model="password" type="password" auto-complete="off" placeholder="请输入密码"></el-input>
                   </el-form-item>
                 </el-form>
+
               <div slot="footer" class="dialog-footer">
+                <a href="" class="forgetpass" @click="forgetp()">忘记密码</a>
                 <el-button @click="loginDi = false;loginLoad = false">取 消</el-button>
                 <el-button type="primary" @click="loginTo()" :loading="loginLoad">登 录</el-button>
               </div>
@@ -102,6 +104,11 @@
                     // this.$router.push('/login');
                 }
             },
+            forgetp() {
+              this.loginDi = false;
+              // this.$route.path.replace('/','');
+              this.$router.push('/forget_password');
+            },
             showRegisterDia() {
               this.register = true;
             },
@@ -128,7 +135,7 @@
                   }else if(this.code == 200){
                     this.$message({
                       type: 'success',
-                      message: "注册信息已提交，请注意查收验证邮件" + this.password
+                      message: "注册信息已提交，请注意查收验证邮件"
                     });
                     this.register = false;
                   }
@@ -261,5 +268,10 @@
     }
     .el-dropdown-menu__item{
         text-align: center;
+    }
+    .forgetpass{
+      font-size: 10px;
+      text-align: right;
+      padding-right: 10px;
     }
 </style>
