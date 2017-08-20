@@ -26,6 +26,26 @@
             </article>
         </div>
 
+
+        <el-button slot="append" icon="message"
+                  @click="feedback()">意见反馈</el-button>
+        <div id="feedback">
+          <el-dialog title="意见反馈" :visible.sync="feedbackDia">
+            <el-form >
+              <el-input
+                type="textarea"
+                :rows="3"
+                placeholder="请输入内容"
+                v-model="textarea">
+              </el-input>
+            </el-form>
+          <div slot="footer" class="dialog-footer">
+            <el-button @click="feedbackDia = false">取 消</el-button>
+            <el-button type="primary" @click="backTo()" :loading="backLoad">反 馈</el-button>
+          </div>
+          </el-dialog>
+        </div>
+
     </div>
 </template>
 
@@ -33,8 +53,60 @@
     export default {
         data() {
             return {
+              api: 'http://118.89.159.95:10352/api/',
+              feedbackDia: false,
+              textarea: '',
+              backLoad: false,
+              email: ''
 
             }
+        },
+        methods: {
+          feedback() {
+            this.feedbackDia = true;
+
+          },
+          backTo() {
+            this.backLoad = true;
+            var myDate = new Date();
+            var qs = require('qs');
+            this.email = this.getCookie('lowPowerName');
+
+            if(this.email == null || this.email == '') {
+              this.$message({
+                type: 'error',
+                message: "未登录"
+              });
+            }else {
+              this.$axios.post(this.api + 'feedback', qs.stringify({
+                feedbackContent: this.textarea,
+                feedbackTime: myDate,
+                feedbackUser: this.email
+              }),
+              {
+                headers: {
+                  'Content-Type': 'application/x-www-form-urlencoded'
+                }
+              }).then(response => {
+                // console.log(response.data);
+                if(response.data.code != 200) {
+                  this.$message({
+                    type: 'error',
+                    message: response.data.msg
+                  });
+                }else if(response.data.code == 200){
+                  this.$message({
+                    type: 'success',
+                    message: "意见反馈成功"
+                  });
+                  this.$router.push('/readme');
+                }
+              })
+            }
+
+            this.backLoad = false;
+
+          }
         }
     }
 </script>

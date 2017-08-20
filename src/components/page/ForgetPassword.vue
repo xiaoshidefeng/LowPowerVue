@@ -30,7 +30,7 @@
                   code: '',
                   newpass: ''
                 },
-                api: 'http://localhost:10352/api/',
+                api: 'http://118.89.159.95:10352/api/',
                 sendLoad: false,
                 time: 0,
                 resetLoad: false

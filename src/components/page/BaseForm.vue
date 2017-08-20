@@ -102,7 +102,7 @@
                     resource: '小天才',
                     desc: ''
                 },
-                api: 'http://localhost:10352/api/',
+                api: 'http://118.89.159.95:10352/api/',
                 token: '',
                 bindingLoad: false,
                 select_floor: '东区1号楼'

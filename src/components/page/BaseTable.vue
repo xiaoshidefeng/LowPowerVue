@@ -87,8 +87,8 @@
     export default {
         data() {
             return {
-                url: 'http://localhost:10352/api/',
-                api: 'http://localhost:10352/api/',
+                url: 'http://118.89.159.95:10352/api/',
+                api: 'http://118.89.159.95:10352/api/',
                 tableData: [],
                 cur_page: 1,
                 multipleSelection: [],

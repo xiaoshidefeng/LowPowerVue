@@ -47,7 +47,7 @@
                 </el-form>
 
               <div slot="footer" class="dialog-footer">
-                <a href="" class="forgetpass" @click="forgetp()">忘记密码</a>
+                <a href="http://120.25.90.170/#/forget_password" class="forgetpass" @click="forgetp">忘记密码</a>
                 <el-button @click="loginDi = false;loginLoad = false">取 消</el-button>
                 <el-button type="primary" @click="loginTo()" :loading="loginLoad">登 录</el-button>
               </div>
@@ -61,7 +61,7 @@
     export default {
         data() {
             return {
-                api: 'http://localhost:10352/api/',
+                api: 'http://118.89.159.95:10352/api/',
                 username: '登录',
                 regist: '注册',
                 register: false,
@@ -107,7 +107,7 @@
             forgetp() {
               this.loginDi = false;
               // this.$route.path.replace('/','');
-              this.$router.push('/forget_password');
+              // this.$router.push('/forgetpassword');
             },
             showRegisterDia() {
               this.register = true;
