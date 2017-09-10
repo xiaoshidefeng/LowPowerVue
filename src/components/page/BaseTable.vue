@@ -132,16 +132,10 @@
             },
             getData(){
                 let self = this;
-                // if(process.env.NODE_ENV === 'development'){
-                //     self.url = '/ms/table/list';
-                // };
-                self.$axios.get(self.api + 'lowpower').then((response) => {
-                  self.tableData = response.data.data;
-                  // console.log(self.tableData)
-                })
-                // self.$axios.post(self.url, {page:self.cur_page}).then((res) => {
-                //     self.tableData = res.data.list;
-                // })
+                  self.$axios.get(self.api + 'lowpower').then((response) => {
+                    self.tableData = response.data.data;
+                  })
+
             },
             search(){
                 this.is_search = true;

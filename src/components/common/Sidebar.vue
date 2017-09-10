@@ -15,26 +15,12 @@
                     </el-menu-item>
                 </template>
             </template>
-
-            <template v-for="item in items2" >
-                <template v-if="item.subs">
-                    <el-submenu :index="item.index">
-                        <template slot="title"><i :class="item.icon"></i>{{ item.title }}</template>
-                        <el-menu-item v-for="(subItem,i) in item.subs" :key="i" :index="subItem.index">{{ subItem.title }}
-                        </el-menu-item>
-                    </el-submenu>
-                </template>
-                <template v-else>
-                    <el-menu-item :index="item.index" v-show="bindDorm">
-                        <i :class="item.icon"></i>{{ item.title }}
-                    </el-menu-item>
-                </template>
-            </template>
         </el-menu>
     </div>
 </template>
 
 <script>
+import Bus from './js/bus.js';
     export default {
         data() {
             return {
@@ -50,14 +36,11 @@
                         title: '低电表格'
                     }
                 ],
-                items2: [
-
-                    {
-                        icon: 'el-icon-date',
-                        index: 'binddorm',
-                        title: '绑定寝室'
-                    }
-                ],
+                bindDormItem: {
+                    icon: 'el-icon-date',
+                    index: 'binddorm',
+                    title: '绑定寝室'
+                },
                 bindDorm: true
             }
         },
@@ -67,11 +50,18 @@
             }
         },
         created() {
-          // if(!this.getCookie('lowPowerName')) {
-          //   this.bindDorm = false;
-          // }else {
-          //   this.bindDorm = true;
-          // }
+          Bus.$on('logout', target => {
+            this.items.splice(2);
+          });
+          Bus.$on('login', target => {
+            this.$set(this.items, 2, this.bindDormItem);
+          });
+          if(!this.getCookie('lowPowerName')) {
+            return;
+          }else {
+            this.$set(this.items, 2, this.bindDormItem);
+          }
+
         }
     }
 </script>
