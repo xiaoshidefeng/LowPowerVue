@@ -9,10 +9,8 @@
             <h3>使用说明</h3>
             <article>
                 <h1>低电查询与推送</h1>
-                <!-- <p></p> -->
                 <h2>低电查询</h2>
                 <p>点击左侧低电表格来进行低电查询</p>
-                <!-- <p>该方案作为一套多功能的后台框架模板，适用于绝大部分的后台管理系统（Web Management System）开发。基于vue.js,使用vue-cli脚手架快速生成项目目录，引用Element UI组件库，方便开发快速简洁好看的组件。分离颜色样式，支持手动切换主题色，而且很方便使用自定义主题色。</p> -->
                 <h2>低电推送</h2>
                 <p>注册用户账号并验证邮箱成功后，登录系统，绑定要推送的寝室号即可。</p>
                 <p>推送会以邮件的形式发送低电通知到您的邮箱（注册邮箱）。</p>
@@ -25,8 +23,6 @@
                   自己租的服务器性能有限，希望大家不要做会损害服务器的事。</p>
             </article>
         </div>
-
-
         <el-button slot="append" icon="message"
                   @click="feedback()">意见反馈</el-button>
         <div id="feedback">
@@ -45,7 +41,6 @@
           </div>
           </el-dialog>
         </div>
-
     </div>
 </template>
 
@@ -58,13 +53,11 @@
               textarea: '',
               backLoad: false,
               email: ''
-
             }
         },
         methods: {
           feedback() {
             this.feedbackDia = true;
-
           },
           backTo() {
             this.backLoad = true;
@@ -88,7 +81,6 @@
                   'Content-Type': 'application/x-www-form-urlencoded'
                 }
               }).then(response => {
-                // console.log(response.data);
                 if(response.data.code != 200) {
                   this.$message({
                     type: 'error',
@@ -103,9 +95,7 @@
                 }
               })
             }
-
             this.backLoad = false;
-
           }
         }
     }

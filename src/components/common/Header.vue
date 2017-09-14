@@ -10,9 +10,8 @@
                     {{regist}}
                 </span>
         </el-dropdown>
-
         <div id="register">
-            <el-dialog title="用户注册" :visible.sync="register">
+            <el-dialog title="用户注册" :visible.sync="register" size="tiny">
                 <el-form>
                     <el-form-item label="用户邮箱" :label-width="formLabelWidth">
                         <el-input v-model="email" auto-complete="off" placeholder="请输入邮箱"></el-input>
@@ -28,9 +27,8 @@
                 </div>
             </el-dialog>
         </div>
-
         <div id="login">
-            <el-dialog title="用户登录" :visible.sync="loginDi">
+            <el-dialog title="用户登录" :visible.sync="loginDi" size="tiny">
                 <el-form>
                     <el-form-item label="用户邮箱" :label-width="formLabelWidth">
                         <el-input v-model="email" auto-complete="off" placeholder="请输入邮箱"></el-input>
@@ -40,7 +38,6 @@
                         <el-input v-model="password" type="password" auto-complete="off" placeholder="请输入密码"></el-input>
                     </el-form-item>
                 </el-form>
-
                 <div slot="footer" class="dialog-footer">
                     <a href="#" class="forgetpass" @click="forgetp">忘记密码</a>
                     <el-button @click="loginDi = false;loginLoad = false">取 消</el-button>
@@ -48,7 +45,6 @@
                 </div>
             </el-dialog>
         </div>
-
     </div>
 </div>
 </template>
@@ -67,7 +63,6 @@ export default {
             code: '',
             msg: '',
             registLoad: false,
-
             loginDi: false,
             loginLoad: false
         }
@@ -96,10 +91,10 @@ export default {
         },
         forgetp() {
             this.loginDi = false;
-            this.$route.path.replace('/binddorm','');
-            this.$route.path.replace('/readme','');
-            this.$route.path.replace('/lowpower','');
-            this.$route.path.replace('/forget_password','');
+            this.$route.path.replace('/binddorm', '');
+            this.$route.path.replace('/readme', '');
+            this.$route.path.replace('/lowpower', '');
+            this.$route.path.replace('/forget_password', '');
             this.$router.push('/forget_password');
         },
         showRegisterDia() {
@@ -196,7 +191,7 @@ export default {
                 this.username = '登录';
                 this.regist = '注册';
                 Bus.$emit('logout', event.target);
-                this.$route.path.replace('/binddorm','');
+                this.$route.path.replace('/binddorm', '');
                 this.$router.push('/readme');
             }).catch(() => {
                 this.$message({
@@ -260,7 +255,8 @@ export default {
     text-align: right;
     padding-right: 10px;
 }
+
 .a {
-  color: #000;
+    color: #000;
 }
 </style>

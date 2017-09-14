@@ -19,18 +19,15 @@
             <p>东区15幢寝室分为A B两个部分，填写格式为：</p>
             <p>寝室号+A或B</p>
             <p>例如：东区15幢101寝室A，填写101A即可（不需要填写15-）</p>
-
             <br>
             <p>西区老9幢带k的寝室要填上对应的k</p>
             <p>例如：9-101k</p>
-
         </article>
     </div>
     <br>
 
     <br>
     <div class="form-box">
-
         <el-form ref="form" :model="form" label-width="80px">
             <el-form-item label="寝室楼：">
                 <el-select v-model="select_floor" placeholder="楼幢号" class="handle-select mr10">

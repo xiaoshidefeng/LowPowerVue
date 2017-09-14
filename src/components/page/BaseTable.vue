@@ -7,11 +7,6 @@
             </el-breadcrumb>
         </div>
         <div class="handle-box">
-            <!-- <el-button type="primary" icon="delete" class="handle-del mr10" @click="delAll">批量删除</el-button> -->
-            <!-- <el-select v-model="select_area" placeholder="东/西区" class="handle-select mr10">
-                <el-option key="1" label="东区" value="东区"></el-option>
-                <el-option key="2" label="西区" value="西区"></el-option>
-            </el-select> -->
             <el-select v-model="select_floor" placeholder="楼幢号" class="handle-select mr10">
                 <el-option key="1" label="东区1号楼" value="东区1号楼"></el-option>
                 <el-option key="3" label="东区3号楼" value="东区3号楼"></el-option>
@@ -55,7 +50,6 @@
             <el-button type="primary" icon="search" @click="search">搜索</el-button>
         </div>
         <el-table :data="data" border style="width: 100%" ref="multipleTable" @selection-change="handleSelectionChange">
-            <!-- <el-table-column type="selection" width="55"></el-table-column> -->
             <el-table-column prop="buildingName" label="楼幢号" sortable width="200">
             </el-table-column>
             <el-table-column prop="dormNum" label="寝室号" sortable width="200">
@@ -65,21 +59,8 @@
             <el-table-column prop="dateNum" label="日期" width="200">
             </el-table-column>
             <el-table-column label="备注" :formatter="formatter">
-                <!-- <template scope="scope">
-                    <el-button size="small"
-                            @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-                    <el-button size="small" type="danger"
-                            @click="handleDelete(scope.$index, scope.row)">删除</el-button>
-                </template> -->
             </el-table-column>
         </el-table>
-        <!-- <div class="pagination">
-            <el-pagination
-                    @current-change ="handleCurrentChange"
-                    layout="prev, pager, next"
-                    :total="1000">
-            </el-pagination>
-        </div> -->
     </div>
 </template>
 
